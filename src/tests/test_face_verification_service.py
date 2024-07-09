@@ -1,4 +1,5 @@
 import pytest
+
 from src.app.face_verification import FaceVerificationService
 
 

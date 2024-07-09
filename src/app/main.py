@@ -1,12 +1,10 @@
 import logging
+
 from app.face_verification import FaceVerificationService
 
 
 def main():
-    """
-    Основная функция для выполнения верификации лиц на изображениях.
-    """
-
+    """Основная функция для выполнения верификации лиц на изображениях."""
     service = FaceVerificationService()
     img_path1 = 'src/tests/img/1.jpg'
     img_path2 = 'src/tests/img/2.jpg'

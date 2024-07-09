@@ -1,23 +1,16 @@
 from deepface import DeepFace
 
+
 class FaceVerificationService:
-    """
-    Сервис верификации лиц.
-    """
+    """Сервис верификации лиц."""
 
     def __init__(self):
-        """
-        Конструктор класса.
-        """
-
+        """Конструктор класса."""
         self.model_name = 'Facenet'
         self.model = DeepFace.build_model(self.model_name)
 
     def generate_face_vector(self, img_path: str) -> list:
-        """
-        Метод для генерации вектора лица на основе фотографии.
-        """
-
+        """Метод для генерации вектора лица на основе фотографии."""
         try:
             # Метод represent возвращает список, берем первый элемент из списка
             face = DeepFace.represent(
