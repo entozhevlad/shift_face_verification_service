@@ -1,5 +1,4 @@
 import logging
-
 from app.face_verification import FaceVerificationService
 
 
@@ -16,10 +15,10 @@ def main():
     logging.info('Вектор 1-го изображения')
     logging.info(face_vector)
     face_vector = service.generate_face_vector(img_path2)
-    logging.info('Вектор w-го изображения')
+    logging.info('Вектор 2-го изображения')
     logging.info(face_vector)
     face_vector = service.generate_face_vector(img_path3)
-    logging.info('Вектор e-го изображения')
+    logging.info('Вектор 3-го изображения')
     logging.info(face_vector)
 
 
