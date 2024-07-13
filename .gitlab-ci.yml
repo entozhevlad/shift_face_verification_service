@@ -2,7 +2,6 @@ stages:
   - lint
   - test
   - build
-  - deploy
 
 build:
   stage: build
@@ -14,11 +13,16 @@ build:
 
 test:
   stage: test
+  image: shift_face_verification_devcontainer-app:latest
   script:
     - poetry shell
     - poetry install
     - poetry run pytest
 
-deploy:
-  stage: deploy
-
+lint:
+  stage: lint
+  image: shift_face_verification_devcontainer-app:latest
+  script:
+    - poetry shell
+    - poetry install
+    - poetry run flake8 src/
