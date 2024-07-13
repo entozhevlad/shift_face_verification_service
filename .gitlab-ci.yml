@@ -1,0 +1,24 @@
+stages:
+  - lint
+  - test
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: shift_face_verification_devcontainer-app:latest
+  script:
+    - poetry shell
+    - poetry install
+    - poetry run python src/app/main.py
+
+test:
+  stage: test
+  script:
+    - poetry shell
+    - poetry install
+    - poetry run pytest
+
+deploy:
+  stage: deploy
+
