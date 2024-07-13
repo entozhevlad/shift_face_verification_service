@@ -8,6 +8,8 @@ variables:
 
 before_script:
   # Устанавливаем poetry
+  - apt-get update
+  - apt-get install --no-install-recommends -y libgl1-mesa-glx libglib2.0-dev
   - pip install poetry
 
 lint:
