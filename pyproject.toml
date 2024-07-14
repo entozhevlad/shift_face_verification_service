@@ -16,7 +16,7 @@ tf-keras = "^2.16.0"
 run-main = "app.main:main"
 
 [tool.poetry.group.dev.dependencies]
-wemake-python-styleguide = "^0.19.2"
+wemake-python-styleguide = "0.18.0"
 pytest = "^8.2.2"
 
 [build-system]
