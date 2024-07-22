@@ -1,6 +1,6 @@
 import pytest
 
-from src.app.face_verification import FaceVerificationService
+from src.app.services.face_verification import FaceVerificationService
 
 
 @pytest.fixture(scope='module')

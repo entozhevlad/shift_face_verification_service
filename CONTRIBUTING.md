@@ -1,16 +1,19 @@
-# Настройка локального окружения
+#### `CONTRIBUTING.md`
+```markdown
+# Руководство для контрибьюторов
 
-Для внесения изменений в репозиторий необходимо настроить работу внутри devcontainer-а.
+## Структура проекта
 
-## MacOS / Windows
+Проект разделен на несколько логических модулей:
 
-- Устновить [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Установить [Visual Studio Code](https://code.visualstudio.com/download)
-- [Настроить Visual Studio Code и Docker для использования Devcontainers](https://code.visualstudio.com/docs/devcontainers/containers#_getting-started)
-- [Настроить Git и SSH для работы в Devcontainer](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials)
-- [Установить шрифт Meslo Nerd Font для CLI в терминале](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#fonts)
-- По необходимости установить и настроить kubectl, внутри контейнера будут использованы настройки с хоста
-- Склонировать этот репозиторий на рабочую станцию
-- Открыть директорию с репозиторием через Visual Studio Code
-- Установить [рекомендуемые плагины](.vscode/extensions.json) Visual Studio Code
-- Ввести `Ctrl+Shift+P` или `Cmd+Shift+P` и выбрать `Dev Containers: Rebuild and Reopen in Container`
+- `src/app/api/` - содержит код для API.
+- `src/app/external/` - содержит код, связанный с внешними библиотеками и зависимостями.
+- `tests/unit/` - содержит юнит-тесты, структурированные аналогично основным модулям.
+- `tests/integration/` - содержит интеграционные тесты.
+
+## Добавление нового функционала
+
+1. Форкните репозиторий и создайте новую ветку для ваших изменений.
+2. Убедитесь, что ваши изменения покрыты тестами.
+3. Запустите все тесты и убедитесь, что они проходят успешно.
+4. Создайте pull request с описанием ваших изменений.
