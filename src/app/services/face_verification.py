@@ -1,5 +1,7 @@
 from deepface import DeepFace
-
+from PIL import Image
+import numpy as np
+from io import BytesIO
 
 class FaceVerificationService:
     """Сервис верификации лиц."""
@@ -9,13 +11,21 @@ class FaceVerificationService:
         self.model_name = 'Facenet'
         self.model = DeepFace.build_model(self.model_name)
 
-    def generate_face_vector(self, img: str) -> list:
+    def generate_face_vector(self, img_bytes: bytes) -> list:
         """Метод для генерации вектора лица на основе фотографии."""
         model = self.model_name
         try:
+            # Преобразуем байты в изображение
+            image = Image.open(BytesIO(img_bytes))
+            image = image.convert("RGB")  # Преобразуем изображение в формат RGB
+
+            # Сохраним изображение во временный файл для DeepFace
+            temp_file_path = "/tmp/temp_image.jpg"
+            image.save(temp_file_path)
+
             # Метод represent возвращает список, берем первый элемент из списка
             face = DeepFace.represent(
-                img,
+                temp_file_path,
                 model_name=model,
                 enforce_detection=True,
             )[0]

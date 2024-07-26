@@ -10,8 +10,6 @@ async def generate_face_vector(file: UploadFile = File(...)):
     try:
         contents = await file.read()
         vector = face_service.generate_face_vector(contents)
-        if isinstance(vector, str):
-            raise HTTPException(status_code=400, detail=vector)
         return {"vector": vector}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
