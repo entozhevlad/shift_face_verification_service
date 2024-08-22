@@ -1,7 +1,9 @@
+from io import BytesIO
+
 from deepface import DeepFace
 from PIL import Image
-import numpy as np
-from io import BytesIO
+from decouple import config
+
 
 class FaceVerificationService:
     """Сервис верификации лиц."""
@@ -15,12 +17,9 @@ class FaceVerificationService:
         """Метод для генерации вектора лица на основе фотографии."""
         model = self.model_name
         try:
-            # Преобразуем байты в изображение
             image = Image.open(BytesIO(img_bytes))
-            image = image.convert("RGB")  # Преобразуем изображение в формат RGB
-
-            # Сохраним изображение во временный файл для DeepFace
-            temp_file_path = "/tmp/temp_image.jpg"
+            image = image.convert('RGB')
+            temp_file_path = '/tmp/temp_image.jpg'
             image.save(temp_file_path)
 
             # Метод represent возвращает список, берем первый элемент из списка

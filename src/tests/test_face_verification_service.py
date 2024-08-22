@@ -4,7 +4,6 @@ import numpy as np
 from io import BytesIO
 
 from src.app.services.face_verification import FaceVerificationService
-
 @pytest.fixture(scope='module')
 def face_service():
     """Фикстура для создания экземпляра FaceVerificationService"""
