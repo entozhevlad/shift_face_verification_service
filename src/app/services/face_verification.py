@@ -2,7 +2,6 @@ from io import BytesIO
 
 from deepface import DeepFace
 from PIL import Image
-from decouple import config
 
 
 class FaceVerificationService:

@@ -6,13 +6,15 @@ router = APIRouter()
 
 face_service = FaceVerificationService()
 
+
 @router.post('/generate_face_vector')
-async def generate_face_vector(file: UploadFile = File(...)):
+async def generate_face_vector(photo_file: UploadFile = File(...)):
+    """Хэндлер генерации вектора лица."""
     try:
-        contents = await file.read()
-        vector = face_service.generate_face_vector(contents)
+        photo_contents = await photo_file.read()
+        vector = face_service.generate_face_vector(photo_contents)
         if isinstance(vector, str):
             raise HTTPException(status_code=400, detail=vector)
         return {'vector': vector}
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
