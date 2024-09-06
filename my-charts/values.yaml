@@ -1,0 +1,19 @@
+namespace: test
+
+replicaCount: 2
+
+image:
+  repository: aliquis21/face-verification-service
+  tag: latest
+
+containerPort: 8080
+
+service:
+  port: 84
+
+database:
+  url: cG9zdGdyZXNxbCthc3luY3BnOi8vdXNlcm5hbWU6cGFzc3dvcmRAcG9zdGdyZXNzLXNlcnZpY2U6NTQzMi92emFydWJpbg==
+
+serviceAccount:
+  create: false
+  name: default

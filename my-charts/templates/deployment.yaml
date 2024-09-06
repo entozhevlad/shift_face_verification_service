@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-charts.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "my-charts.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "my-charts.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "my-charts.fullname" . }}
+    spec:
+      containers:
+      - name: {{ include "my-charts.fullname" . }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "my-charts.fullname" . }}-secrets
+              key: DATABASE_URL
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: {{ include "my-charts.fullname" . }}-config
+              key: KAFKA_BOOTSTRAP_SERVERS
