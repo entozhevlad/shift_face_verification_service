@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zar-face-verification-service
+  namespace: test
+spec:
+  selector:
+    app: zar-face-verification-service
+  ports:
+  - protocol: TCP
+    port: 84
+    targetPort: 8080
+  type: ClusterIP
