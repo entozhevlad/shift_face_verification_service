@@ -41,7 +41,7 @@ def shutdown_tracer():
     except Exception as e:
         print(f"Ошибка завершения трейсера: {e}")
 
-        
+
 @app.get('/')
 def read_main():
     """Func for hello page."""
