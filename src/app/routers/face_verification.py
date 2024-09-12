@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, HTTPException, UploadFile, Depends
-from redis import Redis
+from redis.asyncio import Redis  # Импорт асинхронного клиента Redis
 from src.app.services.face_verification import FaceVerificationService
 import hashlib
 import json
@@ -10,9 +10,8 @@ router = APIRouter()
 face_service = FaceVerificationService()
 
 # Функция зависимости для получения Redis клиента
-def get_redis() -> Redis:
+async def get_redis() -> Redis:
     return Redis(host='redis', port=6379, db=0, decode_responses=True)
-
 
 @router.post('/generate_face_vector')
 async def generate_face_vector(
@@ -29,20 +28,20 @@ async def generate_face_vector(
         cache_key = f"face_vector:{file_hash}"
 
         # Проверка кэша
-        cached_vector = redis_client.get(cache_key)
+        cached_vector = await redis_client.get(cache_key)  # Используем асинхронный метод
         if cached_vector:
             # Если вектор уже есть в кэше, возвращаем его
             return {'vector': json.loads(cached_vector)}
 
         # Генерация вектора лица через сервис
-        vector = face_service.generate_face_vector(photo_contents)
+        vector = await face_service.generate_face_vector(photo_contents)  # Предположим, что метод асинхронный
 
         # Проверка результата на ошибку
         if isinstance(vector, str):
             raise HTTPException(status_code=400, detail=vector)
 
         # Кэширование результата на 60 секунд
-        redis_client.setex(cache_key, 60, json.dumps(vector))
+        await redis_client.setex(cache_key, 60, json.dumps(vector))  # Используем асинхронный метод
 
         # Возвращаем результат
         return {'vector': vector}
